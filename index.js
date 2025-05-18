@@ -20,8 +20,8 @@ function validateEmail(email) {
   return re.test(email);
 }
 
-
-form.addEventListener("submit", function (e) {
+//This is s a very long structure
+/*form.addEventListener("submit", function (e) {
   e.preventDefault();
   if (userName.value === "") {
     showError(userName, "User name is required");
@@ -56,4 +56,27 @@ form.addEventListener("submit", function (e) {
   } else {
     showSuccess(confirme_Password);
   }
+});*/
+
+//Effective structure
+function getuppercase(input){
+  return input.id.charAt(0).toUpperCase()+input.id.slice(1);
+}
+function checkPassword(input1,input2){
+if(input1.value!==input2.value){
+  showError(input2,"Confirmed pasword is not match")
+}
+}
+function checkRequired(inputArr) {
+  inputArr.forEach(function(input){
+  if (input.value === "") {
+    showError(input, `${getuppercase(input)} is required`);
+  } else {
+    showSuccess(input);
+  }});
+}
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  checkRequired([userName, email, password, confirme_Password]);
+  checkPassword(password,confirme_Password);
 });
